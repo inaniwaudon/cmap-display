@@ -1,3 +1,4 @@
+import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import styled from "styled-components";
@@ -27,6 +28,10 @@ const H1 = styled.h1`
   line-height: 1;
   font-size: 20px;
   margin: 0 0 16px 0;
+`;
+
+const H2 = styled.h2`
+  margin: 0;
 `;
 
 const CmapList = styled.ul`
@@ -78,10 +83,18 @@ export default function Home() {
           <H1>cmap-display</H1>
           <h3>Adobe-Japan 1-7</h3>
           <CmapList>
-            <li>UniJIS-UTF16-H</li>
-            <li>UniJIS-UTF16-V</li>
-            <li>UniJIS2004-UTF16-H</li>
-            <li>UniJIS2004-UTF16-V</li>
+            <li>
+              <Link href="/UniJIS-UTF16-H">UniJIS-UTF16-H</Link>
+            </li>
+            <li>
+              <Link href="/UniJIS-UTF16-V">UniJIS-UTF16-V</Link>
+            </li>
+            <li>
+              <Link href="/UniJIS2004-UTF16-V">UniJIS2004-UTF16-H</Link>
+            </li>
+            <li>
+              <Link href="/UniJIS2004-UTF16-V">UniJIS2004-UTF16-V</Link>
+            </li>
           </CmapList>
           <h3>文字セット</h3>
           <ul>
@@ -101,7 +114,7 @@ export default function Home() {
         </Navigation>
         <Main>
           <Header>
-            <h2>UniJIS2004-UTF16-H</h2>
+            <H2>UniJIS2004-UTF16-H</H2>
             <a href="">CMap をダウンロード</a>
             <a href="">JSON 形式でダウンロード</a>
           </Header>

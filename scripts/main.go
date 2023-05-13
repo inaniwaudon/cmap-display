@@ -19,7 +19,13 @@ type UnicodeToCid struct {
 }
 
 func main() {
-	b, err := ioutil.ReadFile("UniJIS2004-UTF16-H.txt")
+	args := os.Args
+	if (len(args) != 2) {
+		fmt.Fprintln(os.Stderr, "Invalid arguments.");
+		os.Exit(1)
+	}
+
+	b, err := ioutil.ReadFile(args[1])
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
