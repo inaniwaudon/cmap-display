@@ -10,12 +10,12 @@ import (
 )
 
 type Cmap struct {
-	UniToCid []UnicodeToCid
+	UniToCid []UnicodeToCid `json:"uniToCid"`
 }
 
 type UnicodeToCid struct {
-	Unicode int64
-	Cid int
+	Unicode int64 `json:"unicode"`
+	Cid int `json:"cid"`
 }
 
 func main() {
