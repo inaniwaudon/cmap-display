@@ -14,7 +14,7 @@ type Cmap struct {
 }
 
 type UnicodeToCid struct {
-	Unicode int64 `json:"unicode"`
+	Unicode int `json:"unicode"`
 	Cid int `json:"cid"`
 }
 
@@ -81,7 +81,10 @@ func getparts(cmap string, symbol string) []string {
 
 func getPairs(line string, isrange bool) ([]UnicodeToCid, error) {
 	toi := strings.Index(line, ">")
-	beginuni, err := strconv.ParseInt(line[strings.Index(line, "<") + 1:toi], 16, 0)
+	unistr := line[strings.Index(line, "<") + 1:toi]
+	beginuni, err := convertSurrogatePair(unistr)
+	//$unicode = 0x10000 + (上位 - 0xD800) * 0x400 + (下位 - 0xDC00);
+
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +93,8 @@ func getPairs(line string, isrange bool) ([]UnicodeToCid, error) {
 
 	if isrange {
 		toi := strings.Index(line, ">")
-		enduni, err = strconv.ParseInt(line[strings.Index(line, "<") + 1:toi], 16, 0)
+		unistr := line[strings.Index(line, "<") + 1:toi]
+		enduni, err = convertSurrogatePair(unistr)
 		if err != nil {
 			return nil, err
 		}
@@ -104,9 +108,27 @@ func getPairs(line string, isrange bool) ([]UnicodeToCid, error) {
 	}
 
 	var pairs []UnicodeToCid
-	var i int64
-	for i = 0; i <= enduni - beginuni; i++ {
+	for i := 0; i <= enduni - beginuni; i++ {
 		pairs = append(pairs, UnicodeToCid{ Unicode: beginuni + i, Cid: cidno + int(i) })
 	}
 	return pairs, nil
+}
+
+func convertSurrogatePair(unistr string) (int, error) {
+	if (len(unistr) <= 4) {
+		uni, err := strconv.ParseInt(unistr, 16, 0)
+		if err != nil {
+			return -1, err
+		}
+		return int(uni), nil
+	}
+	higher, err := strconv.ParseInt(unistr[0:4], 16, 0)
+	if (err != nil) {
+		return -1, err
+	}
+	lower, err := strconv.ParseInt(unistr[4:], 16, 0)
+	if (err != nil) {
+		return -1, err
+	}
+	return 0x10000 + (int(higher) - 0xD800) * 0x400 + (int(lower) - 0xDC00), nil
 }
