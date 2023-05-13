@@ -11,12 +11,14 @@ const CharWrapper = styled.div`
   margin-bottom: 8px;
 `;
 
-const Char = styled.div`
+const Char = styled.div<{ vertical: boolean }>`
   height: 60px;
   line-height: 1;
   font-size: 60px;
   border-bottom: solid 1px #999;
-  display: inline-block;
+  writing-mode: ${({ vertical }) =>
+    vertical ? "vertical-rl" : "horizontal-tb"};
+  display: inline-block;w
 `;
 
 const Details = styled.div`
@@ -26,14 +28,15 @@ const Details = styled.div`
 interface GlyphProps {
   unicode: number;
   cid: number;
+  vertical: boolean;
 }
 
-export const Glyph = ({ unicode, cid }: GlyphProps) => {
+export const Glyph = ({ unicode, cid, vertical }: GlyphProps) => {
   const utfHex = unicode.toString(16).toUpperCase();
   return (
     <Wrapper>
       <CharWrapper>
-        <Char>{String.fromCodePoint(unicode)}</Char>
+        <Char vertical={vertical}>{String.fromCodePoint(unicode)}</Char>
       </CharWrapper>
       <Details>
         <div>{"U+" + ("0000" + utfHex).slice(-Math.max(4, utfHex.length))}</div>
