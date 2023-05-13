@@ -15,9 +15,13 @@ const H1 = styled.h1`
   margin: 0 0 16px 0;
 `;
 
+const Group = styled.div`
+  margin-bottom: 24px;
+`;
+
 const H3 = styled.h3`
   font-size: 16px;
-  margin: 24px 0 0 0;
+  margin: 0;
 `;
 
 const List = styled.ul`
@@ -31,32 +35,39 @@ const List = styled.ul`
 
 const Navigation = () => (
   <Wrapper>
-    <H1>cmap-resource</H1>
+    <H1>cmap-display</H1>
     <H3>Adobe-Japan 1-7</H3>
-    <List>
-      {cmaps.map(({ name }) => (
-        <li key={name}>
-          <Link href={`/cmap/${name}`} legacyBehavior>
-            <Anchor>{name}</Anchor>
-          </Link>
+    <Group>
+      <List>
+        {cmaps.map(({ name }) => (
+          <li key={name}>
+            <Link href={`/cmap/${name}`} legacyBehavior>
+              <Anchor>{name}</Anchor>
+            </Link>
+          </li>
+        ))}
+      </List>
+    </Group>
+    <Group>
+      <H3>文字セット</H3>
+      <List>
+        <li>
+          <Anchor href="#std">Std</Anchor>
         </li>
-      ))}
-    </List>
-    <H3>文字セット</H3>
-    <List>
-      <li>
-        <Anchor href="#std">Std</Anchor>
-      </li>
-      <li>
-        <Anchor href="#pro">Pro</Anchor>
-      </li>
-      <li>
-        <Anchor href="#pr5">Pr5</Anchor>
-      </li>
-      <li>
-        <Anchor href="#pr6">Pr6</Anchor>
-      </li>
-    </List>
+        <li>
+          <Anchor href="#pro">Pro</Anchor>
+        </li>
+        <li>
+          <Anchor href="#pr5">Pr5</Anchor>
+        </li>
+        <li>
+          <Anchor href="#pr6">Pr6</Anchor>
+        </li>
+      </List>
+    </Group>
+    <Group>
+      <Anchor href="https://github.com/inaniwaudon/cmap-display">GitHub</Anchor>
+    </Group>
   </Wrapper>
 );
 

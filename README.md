@@ -10,5 +10,9 @@ https://inaniwaudon.github.io/cmap-display/
 sh ./scripts/create-cmap.sh
 ```
 
-This repository includes the CMaps files distributed in [cmap-resources](https://github.com/adobe-type-tools/cmap-resources).
+
+## Liscense
+This repository is public domain.
+
+This repository includes the CMaps files distributed in [cmap-resources](https://github.com/adobe-type-tools/cmap-resources) under [BSD 3-Clause](https://github.com/adobe-type-tools/cmap-resources/blob/master/LICENSE.md).  
 (c) Copyright 1990-2019 Adobe. All rights reserved.
