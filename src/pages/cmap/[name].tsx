@@ -11,6 +11,8 @@ import path from "path";
 import styled from "styled-components";
 import { CMap, cmaps, supplements } from "@/cmap";
 import { Glyph } from "@/components/Glyph";
+import Navigation from "@/components/Navigation";
+import { Anchor } from "@/components/Parts";
 
 const Page = styled.div`
   color: #333;
@@ -18,10 +20,12 @@ const Page = styled.div`
   display: flex;
 `;
 
-const Navigation = styled.nav`
-  padding-left: 40px;
-  position: fixed;
-  left: 0;
+const H2 = styled.h2`
+  margin: 0;
+`;
+
+const Main = styled.div`
+  margin-left: 220px;
 `;
 
 const Header = styled.header`
@@ -30,24 +34,9 @@ const Header = styled.header`
   gap: 16px;
 `;
 
-const H1 = styled.h1`
-  line-height: 1;
-  font-size: 20px;
-  margin: 0 0 16px 0;
-`;
-
-const H2 = styled.h2`
-  margin: 0;
-`;
-
-const CmapList = styled.ul`
-  margin: 0;
-  padding: 0;
-  list-style: none;
-`;
-
-const Main = styled.div`
-  margin-left: 220px;
+const GlyphSection = styled.div`
+  padding-top: 4px;
+  margin-top: -4px;
 `;
 
 const Glyphs = styled.div<{ bgColor: string }>`
@@ -83,40 +72,19 @@ const Index: NextPage<IndexProps> = ({ name, cmap }: IndexProps) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <Page>
-        <Navigation>
-          <H1>{name}</H1>
-          <h3>Adobe-Japan 1-7</h3>
-          <CmapList>
-            {cmaps.map(({ name }) => (
-              <li key={name}>
-                <Link href={`/cmap/${name}`}>{name}</Link>
-              </li>
-            ))}
-          </CmapList>
-          <h3>文字セット</h3>
-          <ul>
-            <li>
-              <a href="#std">Std</a>
-            </li>
-            <li>
-              <a href="#pro">Pro</a>
-            </li>
-            <li>
-              <a href="#pr5">Pr5</a>
-            </li>
-            <li>
-              <a href="#pr6">Pr6</a>
-            </li>
-          </ul>
-        </Navigation>
+        <Navigation />
         <Main>
           <Header>
             <H2>{name}</H2>
-            <Link href={`/${name}`}>CMap をダウンロード</Link>
-            <Link href={`/${name}.json`}>JSON 形式でダウンロード</Link>
+            <Link href={`/${name}`} legacyBehavior>
+              <Anchor>CMap をダウンロード</Anchor>
+            </Link>
+            <Link href={`/${name}.json`} legacyBehavior>
+              <Anchor>JSON 形式でダウンロード</Anchor>
+            </Link>
           </Header>
           {supplements.map(({ type, supplement, color }, index) => (
-            <section id={type} key={type}>
+            <GlyphSection id={type} key={type}>
               <h3>Std（Adobe-Japan 1-{supplement}）</h3>
               <Glyphs bgColor={color}>
                 {glyphs[index].map((pair, index) => (
@@ -128,7 +96,7 @@ const Index: NextPage<IndexProps> = ({ name, cmap }: IndexProps) => {
                   />
                 ))}
               </Glyphs>
-            </section>
+            </GlyphSection>
           ))}
         </Main>
       </Page>
