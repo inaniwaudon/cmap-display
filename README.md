@@ -2,7 +2,7 @@
 
 This displays the relationship between Unicode (UTF-16) and CID.
 
-https://inaniwaudon.github.io/cmap-display/
+https://cmap-display.pages.dev
 
 ## Create JSON files from CMaps
 

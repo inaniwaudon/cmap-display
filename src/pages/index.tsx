@@ -16,15 +16,13 @@ const Index = () => (
   <Wrapper>
     <h1>cmap-display</h1>
     <p>
-      本サイトでは、Adobe-Japan 1-7 に準拠した CMap に基づく対応表を提供します。
+      本サイトは、Adobe-Japan 1-7 に準拠した CMap に基づく対応表を提供します。
     </p>
     <ul>
       {cmaps.map((cmap) => (
         <li key={cmap.name}>
           <Link href={`/cmap/${cmap.name}`} legacyBehavior>
-            <li>
-              <Anchor>{cmap.name}</Anchor>
-            </li>
+            <Anchor>{cmap.name}</Anchor>
           </Link>
         </li>
       ))}
@@ -59,20 +57,45 @@ const Index = () => (
         Std, Pro 等「N」の表記がないフォントでは JIS90 字形が、StdN, ProN
         等の末尾に「N」が付されたフォントでは JIS2004
         字形が採用されています。字形の差は 葛飾区
-        の「葛」の下の部分等に顕著に現れています。この差を CMap
-        で確認すると、UniJIS-UTF16-H で「葛」（U+845B）が CID 1481
-        に割り当てられているのに対し、UniJIS2004-UTF16-H では CID 7652
-        に割り当てられており、それぞれ別の Unicode と CID
-        が紐づいていることが読み取れます<sup>[2]</sup>。
+        の「葛」の下の部分等に顕著に現れています<sup>[2]</sup>。この差を CMap
+        で確認すると、UniJIS-UTF16-H で「葛」（U+845B）が CID 1481（葛󠄀）
+        に割り当てられているのに対し、UniJIS2004-UTF16-H では CID 7652（葛）
+        に割り当てられており、同一の Unicode に対して異なる CID
+        が紐づいていることが読み取れます<sup>[3]</sup>。
+      </p>
+      <h2>ライセンス</h2>
+      <p>本サイトはパブリックドメインとして公開します。</p>
+      <p>
+        GitHub リポジトリ：
+        <Anchor href="https://github.com/inaniwaudon/cmap-display">
+          inaniwaudon/cmap-display
+        </Anchor>
+      </p>
+      <p>
+        なお、本サイトが配布する CMap およびその派生物には、
+        <Anchor href="https://licenses.opensource.jp/BSD-3-Clause/BSD-3-Clause.html">
+          3 条項 BSD
+        </Anchor>{" "}
+        に基づいて配布される{" "}
+        <Anchor href="https://github.com/adobe-type-tools/cmap-resources">
+          adobe-type-tools/cmap-resources
+        </Anchor>{" "}
+        を利用しています。
+        <br />
+        (c) Copyright 1990-2019 Adobe. All rights reserved.
       </p>
     </article>
     <Footnote>
       <small>
         <p>
           [1] 近年では源ノ角ゴシックのように、独自の文字コレクション（Adobe
-          Identify-0）を採用するケースも存在します。
+          Identity-0）を採用するケースも存在します。
         </p>
-        <p>[2] 技術的な都合で本サイト上でグリフの書き分けはできていません。</p>
+        <p>[2] 葛飾区の「かつ」は「葛」であって「葛󠄀」ではないそうです。</p>
+        <p>
+          [3] 技術的な都合で、本サイトの CMap
+          表上ではグリフの書き分けはできていません。
+        </p>
       </small>
     </Footnote>
   </Wrapper>
