@@ -87,7 +87,7 @@ const Index: NextPage<IndexProps> = ({ name, cmap }: IndexProps) => {
             <GlyphSection id={type} key={type}>
               <h3>
                 {type[0].toUpperCase() + type.slice(1)}
-                （Adobe-Japan 1-{supplement}）
+                （Adobe-Japan1-{supplement}）
               </h3>
               <Glyphs bgColor={color}>
                 {glyphs[index].map((pair, index) => (
